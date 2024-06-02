@@ -2,9 +2,13 @@
 
 This project is a Library Management System built with Spring Boot and Kotlin. It provides a way to manage books, users, and loan records within a library.
 
+## Project Members
+
+This project was made in collaboration with Lucas Monteiro dos Anjos and Natan Bosso.
+
 ## Video Showcase
 
-- [Lucas Monteiro](https://google.com.br)
+- [Lucas Monteiro dos Anjos](https://google.com.br)
 - [Natan Bosso](https://google.com.br)
 
 ## Features
