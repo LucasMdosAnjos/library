@@ -51,6 +51,8 @@ class SecurityConfig(val jwtTokenFilter: JwtTokenFilter) {
                     .requestMatchers(mvc.pattern(HttpMethod.POST, "/users/login")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.POST, "/books")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.POST, "/loans")).permitAll()
+                    .requestMatchers(mvc.pattern(HttpMethod.PUT, "/books/*")).permitAll()
+                    .requestMatchers(mvc.pattern(HttpMethod.PUT, "/loans/*")).permitAll()
                     .requestMatchers(antMatcher("/h2-console/**")).permitAll()
                     .anyRequest().authenticated()
 

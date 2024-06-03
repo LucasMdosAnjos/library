@@ -1,10 +1,12 @@
 package com.projeto.biblioteca.books
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
+import java.io.Console
 
 @RestController
 @RequestMapping("/books")
@@ -31,8 +33,11 @@ class BookController(private val bookService: BookService) {
 
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long, @RequestBody book: BookRequest): ResponseEntity<BookResponse> {
-        val updatedBook = bookService.save(book.toBook())
-        return ResponseEntity.ok(BookResponse(updatedBook))
+        book.toBook().let {
+            it.id = id
+            val updatedBook = bookService.save(it)
+            return ResponseEntity.ok(BookResponse(updatedBook))
+        }
     }
 
     @DeleteMapping("/{id}")
