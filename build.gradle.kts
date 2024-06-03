@@ -12,7 +12,7 @@ group = "com.projeto"
 version = "0.0.1-SNAPSHOT"
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_19
 }
 
 repositories {
@@ -31,14 +31,18 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-jackson:0.12.5")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.5")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("io.mockk:mockk:1.13.11")
+	testImplementation("io.kotest:kotest-runner-junit5-jvm:5.9.0")
+	runtimeOnly("io.kotest:kotest-assertions-core:5.9.0")
 }
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs += "-Xjsr305=strict"
-		jvmTarget = "21"
+		jvmTarget = "19"
 	}
 }
 

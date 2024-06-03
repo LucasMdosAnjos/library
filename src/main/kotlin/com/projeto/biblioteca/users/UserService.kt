@@ -8,6 +8,15 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import javax.security.auth.login.LoginException
+
+// Definição das classes de exceção
+class UserSaveException(message: String?, cause: Throwable?) : RuntimeException(message, cause)
+class UserNotFoundException(message: String?, cause: Throwable?) : RuntimeException(message, cause)
+class UserDeleteException(message: String?, cause: Throwable?) : RuntimeException(message, cause)
+class UserGrantException(message: String?, cause: Throwable?) : RuntimeException(message, cause)
+class UserLoginException(message: String?, cause: Throwable?) : RuntimeException(message, cause)
+class InvalidPasswordException(message: String?, cause: Throwable?) : RuntimeException(message, cause)
 
 @Service
 class UserService(
@@ -33,8 +42,10 @@ class UserService(
     fun findByIdOrNull(id: Long) =
         userRepository.findByIdOrNull(id)
 
-    fun delete(id: Long) =
+    fun delete(id: Long) {
+        //userRepository.findByIdOrNull(id) ?: throw NotFoundException("User not found!", null)
         userRepository.deleteById(id)
+    }
 
     fun grant(id: Long, roleName: String): Boolean {
         val user = userRepository.findByIdOrNull(id) ?: throw IllegalArgumentException("User $id not found!")
@@ -52,11 +63,11 @@ class UserService(
         val user = userRepository.findByEmail(email)
         if(user == null){
             log.warn("User {} not found", email)
-            return null
+            throw UserNotFoundException("User $email not found!", null)
             }
         if (password != user.password){
             log.warn("Invalid password!", email)
-            return null
+            throw InvalidPasswordException("Invalid password!", null)
         }
         log.info("User logged in: id={}, name={}", user.id,user.name)
         return LoginResponse(
