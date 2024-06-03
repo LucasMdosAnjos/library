@@ -1,11 +1,13 @@
 package com.projeto.biblioteca.loans
 
+import LoanNotFoundException
 import io.mockk.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.data.domain.Sort
 import java.time.LocalDateTime
+import java.util.*
 
 class LoanServiceTest {
 
@@ -25,10 +27,10 @@ class LoanServiceTest {
         assertEquals(loans, result)
     }
 
-    /*@Test
+    @Test
     fun `findById should return loan if found`() {
         val loan = Loan(id = 1L, book = mockk(), user = mockk(), loanDate = LocalDateTime.now(), status = LoanStatus.ACTIVE)
-        every { loanRepository.findById(1L) } returns loan
+        every { loanRepository.findById(1L) } returns Optional.of(loan)
 
         val result = loanService.findById(1L)
 
@@ -39,14 +41,14 @@ class LoanServiceTest {
     fun `findById should throw exception if loan not found`() {
         val loan = Loan(id = 1L, book = mockk(), user = mockk(), loanDate = LocalDateTime.now(), status = LoanStatus.ACTIVE)
 
-        every { loanRepository.findById(1L) } returns loan
+        every { loanRepository.findById(1L) } returns Optional.empty()
 
         val exception = assertThrows<LoanNotFoundException> {
             loanService.findById(1L)
         }
 
         assertEquals("Loan with id 1 not found", exception.message)
-    }*/
+    }
 
     @Test
     fun `save should save loan`() {

@@ -1,13 +1,11 @@
 package com.projeto.biblioteca.loans
-import com.projeto.biblioteca.books.BookService
+import LoanDeleteException
+import LoanNotFoundException
+import LoanSaveException
+import LoanUpdateException
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
-
-class LoanNotFoundException(message: String?, cause: Throwable?) : RuntimeException(message, cause)
-class LoanSaveException(message: String?, cause: Throwable?) : RuntimeException(message, cause)
-class LoanUpdateException(message: String?, cause: Throwable?) : RuntimeException(message, cause)
-class LoanDeleteException(message: String?, cause: Throwable?) : RuntimeException(message, cause)
 
 @Service
 class LoanService(

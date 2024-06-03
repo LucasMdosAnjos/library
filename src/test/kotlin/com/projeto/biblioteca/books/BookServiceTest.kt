@@ -1,4 +1,5 @@
 package com.projeto.biblioteca.books
+import BookNotFoundException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
@@ -6,6 +7,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 
 import io.mockk.*
+import java.util.*
 
 class BookServiceTest {
     private val mockBookRepository = mockk<BookRepository>()
@@ -24,10 +26,10 @@ class BookServiceTest {
         assertEquals(books, result)
     }
 
-    /*@Test
+    @Test
     fun `findById should return book if found`() {
         val book = Book(id = 1L, title = "Book One")
-        every { mockBookRepository.findById(1L) } returns book
+        every { mockBookRepository.findById(1L) } returns Optional.of(book)
 
         val result = bookService.findById(1L)
 
@@ -36,14 +38,14 @@ class BookServiceTest {
 
     @Test
     fun `findById should throw exception if book not found`() {
-        every { mockBookRepository.findById(1L) } returns null
+        every { mockBookRepository.findById(1L) } returns Optional.empty()
 
         val exception = assertThrows<BookNotFoundException> {
             bookService.findById(1L)
         }
 
-        assertEquals("Book with id 1 not found", exception.message)
-    }*/
+        assertEquals("Failed to find book with id 1", exception.message)
+    }
 
     @Test
     fun `save should save book`() {

@@ -25,10 +25,10 @@ class BookController(private val bookService: BookService) {
     }
 
     @PostMapping
-    fun create(@RequestBody book: BookRequest): ResponseEntity<BookResponse> =
-        bookService.save(book.toBook()).let {
-            ResponseEntity.status(HttpStatus.CREATED).body(BookResponse(it))
-        }
+    fun create(@RequestBody book: BookRequest): ResponseEntity<BookResponse> {
+        val result = bookService.save(book.toBook())
+        return ResponseEntity.ok(BookResponse(result))
+    }
 
 
     @PutMapping("/{id}")

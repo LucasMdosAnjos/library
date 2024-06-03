@@ -1,12 +1,8 @@
 package com.projeto.biblioteca.books
 
+import BookNotFoundException
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-
-// Definição das classes de exceção
-class BookNotFoundException(message: String?, cause: Throwable?) : IllegalArgumentException(message, cause)
-class BookSaveException(message: String?, cause: Throwable?) : IllegalArgumentException(message, cause)
-class BookDeleteException(message: String?, cause: Throwable?) : IllegalArgumentException(message, cause)
 
 @Service
 class BookService(private val bookRepository: BookRepository) {
@@ -19,7 +15,7 @@ class BookService(private val bookRepository: BookRepository) {
     fun findById(id: Long): Book {
         log.info("Fetching book with id: $id")
         return try {
-            bookRepository.findById(id).orElseThrow { BookNotFoundException("Book with id $id not found", null) }
+            bookRepository.findById(id).orElseThrow { throw BookNotFoundException("Book with id $id not found", null) }
         } catch (e: Exception) {
             throw BookNotFoundException("Failed to find book with id $id", e)
         }

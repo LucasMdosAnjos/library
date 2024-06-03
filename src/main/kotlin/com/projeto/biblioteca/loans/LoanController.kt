@@ -30,7 +30,7 @@ class LoanController(
     @GetMapping("/{id}")
     fun findById(@PathVariable id: Long): ResponseEntity<LoanResponse> {
         val loan = loanService.findById(id)
-        return ResponseEntity.ok(LoanResponse(loan))
+        return ResponseEntity.ok(LoanResponse(loan!!))
     }
 
     @PostMapping
