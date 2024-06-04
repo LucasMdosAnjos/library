@@ -8,7 +8,7 @@ This project was made in collaboration with Lucas Monteiro dos Anjos and Natan B
 
 ## Video Showcase
 
-- [Video]([https://google.com.br](https://youtu.be/EriFcsU29qE))
+- [Video](https://youtu.be/EriFcsU29qE)
 
 ## Features
 
